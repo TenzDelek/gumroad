@@ -17,7 +17,7 @@ export const Modal = ({
 }) => {
   const dispatchClose = () => allowClose && onClose?.();
   const ref = React.useRef<HTMLDialogElement | null>(null);
-  const [supportsNative, setSupportsNative] = React.useState(false);
+  const [supportsNative, setSupportsNative] = React.useState<boolean | null>(null);
   React.useEffect(() => {
     if (!ref.current) return;
     if (supportsNative) {
@@ -38,7 +38,7 @@ export const Modal = ({
 
   return (
     <dialog
-      open={supportsNative ? undefined : open}
+      open={supportsNative === false ? open : undefined}
       ref={ref}
       onClick={(e) => {
         if (!ref.current) return;
