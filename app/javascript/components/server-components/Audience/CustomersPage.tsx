@@ -306,7 +306,10 @@ const CustomersPage = ({
                   />
                 </div>
                 <div>
-                  <div className="grid grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-4">
+                  <div
+                    className="grid gap-4"
+                    style={{ gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))" }}
+                  >
                     <fieldset>
                       <label htmlFor={`${uid}-minimum-amount`}>Paid more than</label>
                       <PriceInput
@@ -330,7 +333,10 @@ const CustomersPage = ({
                   </div>
                 </div>
                 <div>
-                  <div className="grid grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-4">
+                  <div
+                    className="grid gap-4"
+                    style={{ gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))" }}
+                  >
                     <fieldset>
                       <label htmlFor={`${uid}-after-date`}>After</label>
                       <DateInput
@@ -1398,7 +1404,10 @@ const AddressSection = ({
                 ))}
               </select>
             </fieldset>
-            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
+            <div
+              className="grid w-full gap-2"
+              style={{ gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))" }}
+            >
               <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
                 Cancel
               </Button>
@@ -1532,7 +1541,10 @@ const EmailSection = ({
             disabled={isLoading}
             placeholder={label}
           />
-          <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
+          <div
+            className="grid w-full gap-2"
+            style={{ gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))" }}
+          >
             <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
               Cancel
             </Button>
@@ -1790,7 +1802,10 @@ const OptionSection = ({
                   </option>
                 ))}
               </select>
-              <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
+              <div
+                className="grid w-full gap-2"
+                style={{ gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))" }}
+              >
                 <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
                   Cancel
                 </Button>
@@ -1930,7 +1945,10 @@ const SeatSection = ({ seats: currentSeats, onSave }: { seats: number; onSave: (
           <NumberInput value={seats} onChange={(seats) => setSeats(seats ?? 0)}>
             {(props) => <input type="number" {...props} min={1} aria-label="Seats" />}
           </NumberInput>
-          <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
+          <div
+            className="grid w-full gap-2"
+            style={{ gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))" }}
+          >
             <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
               Cancel
             </Button>
@@ -2122,7 +2140,10 @@ const RefundForm = ({
           placeholder={formatPriceCentsWithoutCurrencySymbol(currencyType, amountRefundable)}
           hasError={refundAmountCents.error ?? false}
         />
-        <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
+        <div
+          className="grid w-full gap-2"
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))" }}
+        >
           {onClose ? (
             <Button onClick={onClose} disabled={isLoading}>
               Cancel
