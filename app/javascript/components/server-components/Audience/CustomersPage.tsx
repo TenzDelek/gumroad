@@ -284,7 +284,7 @@ const CustomersPage = ({
                 </WithTooltip>
               }
             >
-              <div className="stack" style={{ width: "35rem" }}>
+              <div className="stack w-[35rem]">
                 <div>
                   <ProductSelect
                     products={products.filter(
@@ -306,13 +306,7 @@ const CustomersPage = ({
                   />
                 </div>
                 <div>
-                  <div
-                    style={{
-                      display: "grid",
-                      gap: "var(--spacer-4)",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))",
-                    }}
-                  >
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-4">
                     <fieldset>
                       <label htmlFor={`${uid}-minimum-amount`}>Paid more than</label>
                       <PriceInput
@@ -336,13 +330,7 @@ const CustomersPage = ({
                   </div>
                 </div>
                 <div>
-                  <div
-                    style={{
-                      display: "grid",
-                      gap: "var(--spacer-4)",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))",
-                    }}
-                  >
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-4">
                     <fieldset>
                       <label htmlFor={`${uid}-after-date`}>After</label>
                       <DateInput
@@ -467,7 +455,7 @@ const CustomersPage = ({
                       <td>
                         {customer.shipping && !customer.shipping.tracking.shipped ? (
                           <WithTooltip tip="Not Shipped">
-                            <Icon name="truck" style={{ marginRight: "var(--spacer-2)" }} aria-label="Not Shipped" />
+                            <Icon name="truck" className="mr-2" aria-label="Not Shipped" />
                           </WithTooltip>
                         ) : null}
                         {customer.email.length <= 30 ? customer.email : `${customer.email.slice(0, 27)}...`}
@@ -476,49 +464,29 @@ const CustomersPage = ({
                       <td>
                         {customer.product.name}
                         {customer.subscription?.is_installment_plan ? (
-                          <span className="pill small" style={{ marginLeft: "var(--spacer-2)" }}>
-                            Installments
-                          </span>
+                          <span className="pill small ml-2">Installments</span>
                         ) : null}
-                        {customer.is_bundle_purchase ? (
-                          <span className="pill small" style={{ marginLeft: "var(--spacer-2)" }}>
-                            Bundle
-                          </span>
-                        ) : null}
+                        {customer.is_bundle_purchase ? <span className="pill small ml-2">Bundle</span> : null}
                         {customer.subscription ? (
                           !customer.subscription.is_installment_plan && customer.subscription.status !== "alive" ? (
-                            <span className="pill small" style={{ marginLeft: "var(--spacer-2)" }}>
-                              Inactive
-                            </span>
+                            <span className="pill small ml-2">Inactive</span>
                           ) : null
                         ) : (
                           <>
                             {customer.partially_refunded ? (
-                              <span className="pill small" style={{ marginLeft: "var(--spacer-2)" }}>
-                                Partially refunded
-                              </span>
+                              <span className="pill small ml-2">Partially refunded</span>
                             ) : null}
-                            {customer.refunded ? (
-                              <span className="pill small" style={{ marginLeft: "var(--spacer-2)" }}>
-                                Refunded
-                              </span>
-                            ) : null}
-                            {customer.chargedback ? (
-                              <span className="pill small" style={{ marginLeft: "var(--spacer-2)" }}>
-                                Chargedback
-                              </span>
-                            ) : null}
+                            {customer.refunded ? <span className="pill small ml-2">Refunded</span> : null}
+                            {customer.chargedback ? <span className="pill small ml-2">Chargedback</span> : null}
                           </>
                         )}
                         {customer.utm_link ? (
                           <div className="has-tooltip" aria-describedby={`utm-link-${customer.id}`}>
-                            <span className="pill small" style={{ marginLeft: "var(--spacer-2)" }}>
-                              UTM
-                            </span>
+                            <span className="pill small ml-2">UTM</span>
                             <div
                               role="tooltip"
                               id={`utm-link-${customer.id}`}
-                              style={{ padding: 0, width: "20rem" }}
+                              className="w-80 p-0"
                               onClick={(e) => e.stopPropagation()}
                             >
                               <UtmLinkStack link={customer.utm_link} showHeader={false} />
@@ -783,7 +751,7 @@ const CustomerDrawer = ({
       <header>
         {onBack ? (
           <button onClick={onBack} aria-label="Return to bundle">
-            <Icon name="arrow-left" style={{ fontSize: "var(--big-icon-size)" }} />
+            <Icon name="arrow-left" className="text-[var(--big-icon-size)]" />
           </button>
         ) : null}
         <h2>{customer.product.name}</h2>
@@ -956,12 +924,11 @@ const CustomerDrawer = ({
           <div>
             <h5>{subscription.is_installment_plan ? "Installment plan status" : "Membership status"}</h5>
             <div
-              style={{
-                color:
-                  subscription.status === "alive" || subscription.status === "fixed_subscription_period_ended"
-                    ? undefined
-                    : "var(--red)",
-              }}
+              className={
+                subscription.status === "alive" || subscription.status === "fixed_subscription_period_ended"
+                  ? ""
+                  : "text-[color:var(--red)]"
+              }
             >
               {subscription.is_installment_plan
                 ? INSTALLMENT_PLAN_STATUS_LABELS[subscription.status]
@@ -1008,7 +975,7 @@ const CustomerDrawer = ({
                 {field.type === "text" ? (
                   field.value
                 ) : (
-                  <div role="tree" style={{ marginTop: "var(--spacer-2)" }}>
+                  <div role="tree" className="mt-2">
                     {field.files.map((file) => (
                       <FileRow file={file} key={file.key} />
                     ))}
@@ -1308,11 +1275,10 @@ const CustomerDrawer = ({
 
 const CommissionStatusPill = ({ commission }: { commission: Commission }) => (
   <span
-    className={cx("pill small", {
+    className={cx("pill small w-fit", {
       primary: commission.status === "completed",
       danger: commission.status === "cancelled",
     })}
-    style={{ width: "fit-content" }}
   >
     {commission.status === "in_progress"
       ? "In progress"
@@ -1380,7 +1346,7 @@ const AddressSection = ({
                 onChange={(evt) => updateShipping({ street_address: evt.target.value })}
               />
             </fieldset>
-            <div style={{ display: "grid", gridAutoFlow: "column", gridAutoColumns: "1fr", gap: "var(--spacer-2)" }}>
+            <div className="grid auto-cols-fr grid-flow-col gap-2">
               <fieldset>
                 <legend>
                   <label htmlFor={`${uid}-city`}>City</label>
@@ -1432,14 +1398,7 @@ const AddressSection = ({
                 ))}
               </select>
             </fieldset>
-            <div
-              style={{
-                width: "100%",
-                display: "grid",
-                gap: "var(--spacer-2)",
-                gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))",
-              }}
-            >
+            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
               <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
                 Cancel
               </Button>
@@ -1573,14 +1532,7 @@ const EmailSection = ({
             disabled={isLoading}
             placeholder={label}
           />
-          <div
-            style={{
-              width: "100%",
-              display: "grid",
-              gap: "var(--spacer-2)",
-              gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))",
-            }}
-          >
+          <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
             <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
               Cancel
             </Button>
@@ -1838,14 +1790,7 @@ const OptionSection = ({
                   </option>
                 ))}
               </select>
-              <div
-                style={{
-                  width: "100%",
-                  display: "grid",
-                  gap: "var(--spacer-2)",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))",
-                }}
-              >
+              <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
                 <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
                   Cancel
                 </Button>
@@ -1985,14 +1930,7 @@ const SeatSection = ({ seats: currentSeats, onSave }: { seats: number; onSave: (
           <NumberInput value={seats} onChange={(seats) => setSeats(seats ?? 0)}>
             {(props) => <input type="number" {...props} min={1} aria-label="Seats" />}
           </NumberInput>
-          <div
-            style={{
-              width: "100%",
-              display: "grid",
-              gap: "var(--spacer-2)",
-              gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))",
-            }}
-          >
+          <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
             <Button onClick={() => setIsEditing(false)} disabled={isLoading}>
               Cancel
             </Button>
@@ -2184,14 +2122,7 @@ const RefundForm = ({
           placeholder={formatPriceCentsWithoutCurrencySymbol(currencyType, amountRefundable)}
           hasError={refundAmountCents.error ?? false}
         />
-        <div
-          style={{
-            width: "100%",
-            display: "grid",
-            gap: "var(--spacer-2)",
-            gridTemplateColumns: "repeat(auto-fit, minmax(var(--dynamic-grid), 1fr))",
-          }}
-        >
+        <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(var(--dynamic-grid),1fr))] gap-2">
           {onClose ? (
             <Button onClick={onClose} disabled={isLoading}>
               Cancel
@@ -2216,7 +2147,7 @@ const RefundForm = ({
           </div>
         ) : null}
       </fieldset>
-      <div style={{ display: "contents" }}>
+      <div className="contents">
         <Modal
           open={isModalShowing}
           onClose={() => setIsModalShowing(false)}
@@ -2258,7 +2189,7 @@ const ChargeRow = ({
   return (
     <>
       <section key={purchase.id}>
-        <section style={{ display: "flex", gap: "var(--spacer-1)", alignItems: "center" }}>
+        <section className="flex items-center gap-1">
           <h5>
             {formatPrice(purchase.amount_refundable, purchase.currency_type)} on{" "}
             {new Date(purchase.created_at).toLocaleDateString(userAgentInfo.locale, {
@@ -2571,7 +2502,7 @@ const CommissionSection = ({
             </div>
           ) : null}
           <label className="button">
-            <input type="file" onChange={handleFileChange} disabled={isLoading} multiple style={{ display: "none" }} />
+            <input type="file" onChange={handleFileChange} disabled={isLoading} multiple className="hidden" />
             <Icon name="paperclip" /> Upload files
           </label>
           {commission.status === "in_progress" ? (
