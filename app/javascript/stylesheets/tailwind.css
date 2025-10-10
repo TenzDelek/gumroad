@@ -32,6 +32,7 @@
   font-weight: 700;
   font-style: italic;
 }
+
 @theme {
   --color-black: #000000;
   --color-white: #ffffff;
